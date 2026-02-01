@@ -90,26 +90,82 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ----------------------------------------
+  // Modal
+  // ----------------------------------------
+  const modal = document.getElementById('modal');
+  const modalOverlay = document.getElementById('modal-overlay');
+  const modalTitle = document.getElementById('modal-title');
+  const modalMessage = document.getElementById('modal-message');
+  const modalClose = document.getElementById('modal-close');
+
+  const showModal = (title, message) => {
+    modalTitle.textContent = title;
+    modalMessage.innerHTML = message;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const hideModal = () => {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  };
+
+  modalClose.addEventListener('click', hideModal);
+  modalOverlay.addEventListener('click', hideModal);
+
+  // ----------------------------------------
   // Contact form handling
   // ----------------------------------------
   const contactForm = document.getElementById('contact-form');
+  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzsBXd5QHEmFa4zXIVXj8Q_t4OoXTX7qL0mAalnmzWbnRdQc2wx7kD3hZ5NTsVRh8tPIw/exec';
 
-  contactForm.addEventListener('submit', (e) => {
+  contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+
+    const submitButton = contactForm.querySelector('button[type="submit"]');
+    const originalText = submitButton.textContent;
+
+    // 送信中の状態に変更
+    submitButton.textContent = '送信中...';
+    submitButton.disabled = true;
 
     // フォームデータの取得
     const formData = new FormData(contactForm);
-    const data = Object.fromEntries(formData.entries());
+    const data = {
+      name: formData.get('name'),
+      company: formData.get('company-name'),
+      email: formData.get('email'),
+      phone: formData.get('phone'),
+      message: formData.get('message')
+    };
 
-    // ここでフォーム送信処理を実装
-    // 現在はUIのみ。後日Google Form連携等を追加予定
+    try {
+      const response = await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      });
 
-    console.log('Form data:', data);
+      // no-corsモードではレスポンスを確認できないため、送信成功とみなす
+      showModal(
+        'お問合せありがとうございます',
+        '内容を確認次第、ご連絡いたします。<br>返信までに数日要することがありますがご了承ください。'
+      );
+      contactForm.reset();
 
-    // 仮の送信完了メッセージ
-    alert('お問い合わせありがとうございます。\n\n※現在、フォーム送信機能は準備中です。\nメールでのお問い合わせをお願いいたします。');
-
-    // フォームリセット
-    // contactForm.reset();
+    } catch (error) {
+      console.error('Error:', error);
+      showModal(
+        '送信に失敗しました',
+        '恐れ入りますが、時間をおいて再度お試しください。'
+      );
+    } finally {
+      // ボタンを元に戻す
+      submitButton.textContent = originalText;
+      submitButton.disabled = false;
+    }
   });
 });
