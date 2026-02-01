@@ -46,7 +46,12 @@ body {
   font-size: 16px;
   line-height: 1.8;
   color: var(--color-text);
-  background-color: var(--color-white);
+  background:
+    radial-gradient(ellipse at 20% 30%, rgba(0, 74, 173, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 50%, rgba(0, 120, 200, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 30% 80%, rgba(0, 150, 220, 0.05) 0%, transparent 40%),
+    linear-gradient(180deg, #ffffff 0%, #f0f6fc 50%, #e8f2fc 100%);
+  background-attachment: fixed;
 }
 
 a {
@@ -306,18 +311,15 @@ button {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url('../Top_Background_Image.png');
-  background-size: cover;
-  background-position: center;
+  background:
+    radial-gradient(ellipse at 20% 80%, rgba(0, 120, 200, 0.3) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(0, 180, 255, 0.2) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 60%, rgba(100, 150, 255, 0.15) 0%, transparent 40%),
+    linear-gradient(135deg, #004aad 0%, #0066cc 50%, #0080dd 100%);
 }
 
 .hero-bg-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(0, 102, 204, 0.85) 0%, rgba(0, 68, 153, 0.9) 100%);
+  display: none;
 }
 
 .hero-content {
@@ -378,6 +380,15 @@ button {
   padding: var(--section-padding) 0;
 }
 
+.section:nth-child(odd) {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.section:nth-child(even) {
+  background: rgba(0, 74, 173, 0.03);
+}
+
+
 .section-header {
   text-align: center;
   margin-bottom: 60px;
@@ -425,7 +436,7 @@ button {
    Service Section
    ---------------------------------------- */
 .service {
-  background-color: var(--color-white);
+  background: transparent;
 }
 
 .service-cards {
@@ -494,7 +505,7 @@ button {
    Flow Section
    ---------------------------------------- */
 .flow {
-  background-color: var(--color-bg-sub);
+  background: transparent;
 }
 
 .flow-steps {
@@ -581,7 +592,7 @@ button {
    Company Section
    ---------------------------------------- */
 .company {
-  background-color: var(--color-white);
+  background: transparent;
 }
 
 .company-table-wrapper {
@@ -634,7 +645,7 @@ button {
    Contact Section
    ---------------------------------------- */
 .contact {
-  background-color: var(--color-bg-sub);
+  background: transparent;
 }
 
 .contact-lead {
