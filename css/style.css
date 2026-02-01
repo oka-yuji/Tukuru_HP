@@ -306,11 +306,9 @@ button {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  /* プレースホルダー背景：後日画像に差し替え可能 */
-  /* background-image: url('../images/hero.jpg'); */
-  /* background-size: cover; */
-  /* background-position: center; */
+  background-image: url('../Top_Background_Image.png');
+  background-size: cover;
+  background-position: center;
 }
 
 .hero-bg-overlay {
