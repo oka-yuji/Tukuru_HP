@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ["main"]   # 運用しているブランチ名に合わせてね
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
@@ -24,13 +24,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # 素のHTML/CSSなので「ビルド」は不要
-      # もし /site ディレクトリ配下に置いてるなら path を変更
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "."   # ここが公開対象（root）
+          path: "."
 
       - name: Deploy to GitHub Pages
         id: deployment
