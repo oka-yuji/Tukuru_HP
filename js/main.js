@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Contact form handling
   // ----------------------------------------
   const contactForm = document.getElementById('contact-form');
-  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzsBXd5QHEmFa4zXIVXj8Q_t4OoXTX7qL0mAalnmzWbnRdQc2wx7kD3hZ5NTsVRh8tPIw/exec';
+  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzUcsWyln37jR9367gmp4yJJPx7mQSPTCVHaa8mNrFAv8mBjyg7fkCpR8XYRNjxpKYw5g/exec';
 
   contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
